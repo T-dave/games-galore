@@ -40,12 +40,10 @@ const OnboardingScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* SKIP */}
       <TouchableOpacity style={styles.skip} onPress={finishOnboarding}>
         <Caption>Skip</Caption>
       </TouchableOpacity>
 
-      {/* SLIDES */}
       <FlatList
         data={onboardingData}
         renderItem={({ item }) => <OnboardingItem item={item} />}
@@ -56,10 +54,8 @@ const OnboardingScreen = () => {
         viewabilityConfig={viewConfig}
         ref={flatListRef}
       />
-      {/* PAGINATION */}
       <Paginator data={onboardingData} currentIndex={currentIndex} />
 
-      {/* BUTTON */}
       <Button onPress={scrollToNext} isLoading={isLoading}>
         {currentIndex === onboardingData.length - 1 ? "Get Started" : "Next"}
       </Button>
