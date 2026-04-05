@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     price:{
         backgroundColor:'green',
         alignSelf:'flex-start',
-        padding:4
+        padding:4,
+        borderRadius:5
     },
 });

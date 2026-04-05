@@ -1,8 +1,8 @@
-import { Body, Caption, Subtitle } from "@/constants/text";
+import { Body, Caption, Subtitle, Title } from "@/constants/text";
 import useHook from "@/hooks/generalHook";
 import useAppTheme from "@/hooks/use-Theme";
 import { RootState } from "@/store/store";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import Price from "./ui/price";
 
@@ -10,7 +10,7 @@ interface GameProp {
   item: any;
   onPress: () => void;
 }
-export default function GameCard({ item, onPress }: GameProp) {
+export function DealCard({ item, onPress }: GameProp) {
   const storeData = useSelector((state: RootState) => state.store.storeData);
   const getStore = (id: string) =>
     storeData.filter((obj: { storeID: string }) => obj.storeID === id);
@@ -49,6 +49,28 @@ export default function GameCard({ item, onPress }: GameProp) {
     </TouchableOpacity>
   );
 }
+
+export function GameCard({ item, onPress }: GameProp){
+  const { showTitle } = useHook();
+  return (
+    <ImageBackground 
+    source={{ uri: item.thumb }} 
+    style={{marginVertical:5, height:120}} 
+    imageStyle={{borderRadius:10}}
+    >
+    <TouchableOpacity
+      style={styles.game}
+      onPress={onPress}
+    >
+     <Title color="#FFF">{showTitle(item.external, 18)}</Title>
+     <View style={styles.gamePrice}>
+      <Body color="#FFF">${item.cheapest}</Body>
+    </View>
+    </TouchableOpacity>
+    </ImageBackground>
+  )
+}
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
@@ -88,5 +110,20 @@ const styles = StyleSheet.create({
   store:{
     flexDirection:'row',
     alignItems:'center'
+  },
+  game:{
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'#00000055',
+    borderRadius:10,
+    height:'100%'
+  },
+  gamePrice:{
+    position:'absolute',
+    height:'100%',
+    width:'100%',
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    padding:10
   }
 });

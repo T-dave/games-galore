@@ -1,6 +1,6 @@
 import { Body, ButtonText } from "@/constants/text";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import GameCard from "./gameCard";
+import { DealCard } from "./gameCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
@@ -9,7 +9,7 @@ export default function TopDeals() {
   return (
     <View style={styles.topDeals}>
       <View style={styles.topDealsTop}>
-        <Body>Top Deals</Body>
+        <Body style={{marginBottom:10}}>Top Deals</Body>
         <TouchableOpacity onPress={()=>console.log(topDealsData)}>
           <ButtonText>View All</ButtonText>
         </TouchableOpacity>
@@ -17,7 +17,7 @@ export default function TopDeals() {
       {
         topDealsData.slice(0,7).map((item: any, index: number) => {
         return (
-            <GameCard
+            <DealCard
             onPress={() => console.log(topDealsData)}
             item={item}
             key={index}

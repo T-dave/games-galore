@@ -1,14 +1,14 @@
-import Button from "@/constants/button";
+import Button from "@/components/button";
 import { Caption } from "@/constants/text";
+import useHook from "@/hooks/generalHook";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import OnboardingItem from "../../components/onboard";
 import Paginator from "../../components/paginator";
 import { onboardingData } from "../../data/onboardData";
-import { router } from "expo-router";
-import useHook from "@/hooks/generalHook";
 
 const OnboardingScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -34,7 +34,7 @@ const OnboardingScreen = () => {
       router.navigate("/home/home");
     } catch (e) {
       setIsLoading(false);
-      console.error(e)
+      console.error(e);
     }
   };
 

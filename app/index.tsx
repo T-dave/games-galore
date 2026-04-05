@@ -27,6 +27,7 @@ export default function Index() {
     };
 
     check();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   return (

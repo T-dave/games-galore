@@ -2,11 +2,13 @@ import { useDispatch } from 'react-redux';
 import { setBannerData } from '@/store/slices/bannerSlice';
 import { setStoreData, setTopDealsData } from '@/store/slices/storeSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState } from 'react';
 
 const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
 
 export default function useData(){
     const dispatch = useDispatch()
+    const [searchLoadingState, setSearchLoadingState] = useState('none');
     const fetchBanner = async ()=>{
         try{
         const response = await fetch(`${BASE_URL}/deals?storeID=1&minimumReviewCount=150000&onSale=1`);
@@ -34,6 +36,18 @@ export default function useData(){
             console.error(error);
         }
     }
+    const searchGame = async (game:string)=>{
+        setSearchLoadingState('loading');
+        try{
+         const response = await fetch(`${BASE_URL}/games?title=${game}`);
+           const data = await response.json();
+           setSearchLoadingState('loaded');
+           return data
+        }catch(error){
+            setSearchLoadingState('failed');
+            console.error(error);
+        }
+    }
     const deleteItem = async (key:any) => {
     try {
         await AsyncStorage.removeItem(key);
@@ -43,5 +57,5 @@ export default function useData(){
     }
     };
 
-    return { fetchBanner, deleteItem, fetchStore, fetchTopDeals }
+    return { fetchBanner, deleteItem, fetchStore, fetchTopDeals, searchGame, searchLoadingState }
 }

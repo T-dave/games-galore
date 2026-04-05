@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
         color:"#DDDDDD",
         textDecorationLine:"line-through",
         fontSize:13,
-        marginRight:8
+        marginRight:5
     }
 })
