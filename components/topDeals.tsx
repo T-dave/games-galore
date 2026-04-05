@@ -1,9 +1,11 @@
 import { Body, ButtonText } from "@/constants/text";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
 import { DealCard } from "./gameCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import Loader from "./ui/loader";
 
+const { height, width } = Dimensions.get("window");
 export default function TopDeals() {
     const topDealsData = useSelector((state: RootState) => state.store.topDealsData)
   return (
@@ -15,6 +17,7 @@ export default function TopDeals() {
         </TouchableOpacity>
       </View>
       {
+        topDealsData.length > 0 ?
         topDealsData.slice(0,7).map((item: any, index: number) => {
         return (
             <DealCard
@@ -24,6 +27,8 @@ export default function TopDeals() {
             />
         );
         })
+        :
+        <Loader/>
       }
     </View>
   );
@@ -37,4 +42,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  loaderView:{
+    position:'absolute',
+    flex:1,
+    height:height,
+    width:width,
+    alignItems:'center',
+    justifyContent:'center',
+  }
 });

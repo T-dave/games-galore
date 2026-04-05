@@ -25,6 +25,11 @@ export default function SearchScreen() {
           <ActivityIndicator size={60}/>
         </View>
         :
+        searchLoadingState === 'loaded' && data.length === 0 ?
+        <View style={styles.loaderView}>
+          <Body>No results found</Body>
+        </View>
+        :
         searchLoadingState === 'loaded' ?
         data.map((item: any, index: number) => {
           return (
