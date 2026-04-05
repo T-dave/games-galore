@@ -1,6 +1,8 @@
 import { ImageBackground, StyleSheet, ImageBackgroundProps, View, Dimensions } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Body, Title } from "@/constants/text";
+import useHook from "@/hooks/generalHook";
+import Price from "./ui/price";
 
 const { width } = Dimensions.get("window");
 
@@ -8,15 +10,7 @@ interface Props extends ImageBackgroundProps{
     item: any;
 }
 export default function BannerSlider({ item, style }:Props){
-    const showTitle = (title:string)=>{
-        if(title.length < 25) return title
-        else return title.slice(0,25) + "..."
-    }
-    const savings = (oldPrice: string, newPrice: string)=>{
-        const oldNum = Number(oldPrice);
-        const newNum = Number(newPrice);
-        return Math.round(((newNum - oldNum) / newNum) * 100)
-    }
+    const { showTitle } = useHook();
     return(
         <View style={{width:width, paddingHorizontal:5}}>
             <ImageBackground source={{uri: item.thumb}} style={[styles.banner, style]} imageStyle={{borderRadius:10}} >
@@ -26,13 +20,7 @@ export default function BannerSlider({ item, style }:Props){
                 end={{ x: 0.5, y: 0 }}
                 style={styles.innerView}
                 >
-                    <View style={styles.price}>
-                        <Body 
-                        style={{fontSize:13}} 
-                        color="white">
-                            -{savings(item.salePrice, item.normalPrice)}%
-                        </Body>
-                    </View>
+                    <Price oldPrice={item.normalPrice} newPrice={item.salePrice}/>
                     <Title color="white" style={styles.title}>{showTitle(item.title)}</Title>
                     <View style={styles.bottom}>
                         <Body color="white" style={styles.oldPrice}>${item.normalPrice}</Body>
@@ -57,11 +45,6 @@ const styles = StyleSheet.create({
     title:{
         alignSelf:'center',
         fontSize:25
-    },
-    price:{
-        backgroundColor:'green',
-        alignSelf:'flex-start',
-        padding:4
     },
     bottom:{
         flexDirection:'row',

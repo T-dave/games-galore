@@ -30,7 +30,7 @@ export default function TabLayout() {
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
-            <Icon name="rocket" size={30} color={color} />
+            <Icon name="home" size={30} color={color} />
           ),
         }}
       />
@@ -40,7 +40,7 @@ export default function TabLayout() {
         options={{
           tabBarLabel: "Search",
           tabBarIcon: ({ color }) => (
-            <Icon name="comments" size={30} color={color} />
+            <Icon name="search" size={30} color={color} />
           ),
         }}
       />
@@ -50,7 +50,7 @@ export default function TabLayout() {
         options={{
           tabBarLabel: "Favorites",
           tabBarIcon: ({ color }) => (
-            <Icon name="facebook" size={30} color={color} />
+            <Icon name="heart" size={30} color={color} />
           ),
         }}
       />

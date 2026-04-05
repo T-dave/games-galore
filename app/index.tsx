@@ -6,11 +6,13 @@ import useData from "@/hooks/dataHook";
 
 export default function Index() {
   const router = useRouter();
-  const { fetchBanner } = useData();
+  const { fetchBanner, fetchStore, fetchTopDeals } = useData();
   useEffect(() => {
     const check = async () => {
       try {
           fetchBanner();
+          fetchStore();
+          fetchTopDeals();
           const value = await AsyncStorage.getItem("onboardingSeen");
 
         if (value === "true") {

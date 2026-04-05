@@ -10,10 +10,10 @@ const initialState: BannerState = {
 };
 
 export const bannerSlice = createSlice({
-  name: "counter",
+  name: "banner",
   initialState,
   reducers: {
-    setBannerData: (state, action: PayloadAction<number>) => {
+    setBannerData: (state, action: PayloadAction<any>) => {
       state.bannerData = action.payload;
     },
   },

@@ -97,7 +97,7 @@ export const Caption = (props: Props) => (
 
 export const ButtonText = (props: Props) => <AppText variant="button" {...props} />;
 
-export const Price = (props: Props) => <AppText variant="price" {...props} />;
+export const PriceText = (props: Props) => <AppText variant="price" {...props} />;
 
 export const Highlight = (props: Props) => (
   <AppText variant="highlight" {...props} />
