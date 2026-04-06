@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import useAppTheme from "@/hooks/use-Theme";
 import { useState } from "react";
@@ -9,6 +9,9 @@ interface SearchProps{
 export default function Search({handleSearch}:SearchProps){
     const {colour} = useAppTheme();
     const [searchText, setSearchText] = useState("");
+    const handleClear=()=>{
+        setSearchText("");
+    }
     return (
         <View style={[styles.search, {backgroundColor:colour.cardBackground}]}>
              <Icon name="search" size={22} color={colour.text} />
@@ -22,6 +25,9 @@ export default function Search({handleSearch}:SearchProps){
              selectTextOnFocus
              placeholder="Enter your game"
              />
+             <TouchableOpacity onPress={handleClear} style={{paddingHorizontal:10}}>
+                <Icon name="times" size={22} color={colour.text} />
+             </TouchableOpacity>
         </View>
     )
 }
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
         paddingLeft:10,
     },
     input:{
-        width:'100%',
+        flex:1,
         fontSize:18,
         marginLeft:5,
     }

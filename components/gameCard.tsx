@@ -5,21 +5,12 @@ import { RootState } from "@/store/store";
 import { Image, ImageBackground, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSelector } from "react-redux";
 import Price from "./ui/price";
-import { router } from 'expo-router';
 
 interface GameProp {
   item: any;
   onPress: ()=>void;
 }
-export function DealCard({ item }: GameProp) {
-
-  const handlePress = () => {
-    router.navigate({
-      pathname: '/game',
-      params: { title:item.title, image:item.thumb }
-    });
-  };
-
+export function DealCard({ item, onPress }: GameProp) {
   const storeData = useSelector((state: RootState) => state.store.storeData);
   const getStore = (id: string) =>
     storeData.filter((obj: { storeID: string }) => obj.storeID === id);
@@ -30,7 +21,7 @@ export function DealCard({ item }: GameProp) {
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor: colour.cardBackground }]}
-      onPress={handlePress}
+      onPress={onPress}
     >
       <View style={styles.priceSavings}>
         <Price oldPrice={item.normalPrice} newPrice={item.salePrice} />

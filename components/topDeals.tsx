@@ -1,11 +1,22 @@
 import { Body, ButtonText } from "@/constants/text";
-import { ActivityIndicator, Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity, View } from "react-native";
 import { DealCard } from "./gameCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { router } from "expo-router";
+
+interface RouteProps{
+  gameID:string;
+}
 
 export default function TopDeals() {
-    const topDealsData = useSelector((state: RootState) => state.store.topDealsData)
+    const topDealsData = useSelector((state: RootState) => state.store.topDealsData);
+    const handlePress = ({gameID}:RouteProps) => {
+      router.navigate({
+        pathname: '/game',
+        params: { id:gameID }
+      });
+    };
   return (
     <View style={styles.topDeals}>
       <View style={styles.topDealsTop}>
@@ -19,7 +30,7 @@ export default function TopDeals() {
         topDealsData.slice(0,7).map((item: any, index: number) => {
         return (
             <DealCard
-            onPress={() => console.log(topDealsData)}
+            onPress={() => handlePress(item)}
             item={item}
             key={index}
             />

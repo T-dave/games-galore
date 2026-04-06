@@ -12,11 +12,12 @@ export default function CustomContainer({
   type,
   style,
   children,
+  edges=["top", "bottom"]
 }: ContainerProps) {
   const { colour } = useAppTheme();
   return (
     <SafeAreaView
-      edges={["top"]}
+      edges={edges}
       style={[styles.container, { backgroundColor: colour.background }, style]}
     >
       <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>

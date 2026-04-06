@@ -7,7 +7,7 @@ import TopDeals from "@/components/topDeals";
 export default function HomeScreen() {
   const bannerSliderData = useSelector((state: RootState) => state.banner.bannerData);
   return (
-    <CustomContainer>
+    <CustomContainer edges={["top"]}>
         <Banner bannerSliderData={bannerSliderData}/>
         <TopDeals/>
     </CustomContainer>

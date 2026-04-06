@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, ImageBackgroundProps, View, Dimensions } from "react-native";
+import { ImageBackground, StyleSheet, ImageBackgroundProps, View, Dimensions, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Body, Title } from "@/constants/text";
 import useHook from "@/hooks/generalHook";
@@ -8,11 +8,12 @@ const { width } = Dimensions.get("window");
 
 interface Props extends ImageBackgroundProps{
     item: any;
+    onPress: ()=>void;
 }
-export default function BannerSlider({ item, style }:Props){
+export default function BannerSlider({ item, style, onPress }:Props){
     const { showTitle } = useHook();
     return(
-        <View style={{width:width, paddingHorizontal:5}}>
+        <TouchableOpacity style={{width:width, paddingHorizontal:5}} onPress={onPress}>
             <ImageBackground source={{uri: item.thumb}} style={[styles.banner, style]} imageStyle={{borderRadius:10}} >
                 <LinearGradient 
                 colors={['rgba(0,0,0,0.7)', 'transparent']}
@@ -28,7 +29,7 @@ export default function BannerSlider({ item, style }:Props){
                     </View>
                 </LinearGradient>
             </ImageBackground>
-        </View>
+        </TouchableOpacity>
     )
 }
 

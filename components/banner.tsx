@@ -2,6 +2,7 @@ import BannerSlider from "@/components/bannerSlider";
 import { View, FlatList, Dimensions } from "react-native";
 import { useRef, useState, useEffect } from "react";
 import Paginator from "@/components/paginatorBanner";
+import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 export default function Banner({bannerSliderData}:any) {
@@ -27,6 +28,12 @@ export default function Banner({bannerSliderData}:any) {
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList<any> | null>(null);
+  const handlePress = async (id:string) => {
+    router.navigate({
+      pathname: '/game',
+      params: { id:id }
+    });
+  };
   const viewableItemsChanged = useRef(({ viewableItems }: any) => {
   if (viewableItems.length > 0) {
     setCurrentIndex(viewableItems[0].index);
@@ -50,7 +57,7 @@ const viewConfig = useRef({
           index,
         })}
         ref={flatListRef}
-        renderItem={({item})=><View><BannerSlider item={item}/></View>}
+        renderItem={({item})=><View><BannerSlider item={item} onPress={()=>handlePress(item.gameID)}/></View>}
         />
         <Paginator data={bannerSliderData} currentIndex={currentIndex} />
       </View>

@@ -8,10 +8,18 @@ import { GameCard } from "@/components/gameCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import StoreCards from "@/components/storeCard";
+import { router } from "expo-router";
 
 const { height, width } = Dimensions.get("window");
+
 export default function SearchScreen() {
   const storeData = useSelector((state: RootState) => state.store.storeData);
+  const handlePress = async (id:string) => {
+    router.navigate({
+      pathname: '/game',
+      params: { id:id }
+    });
+  };
   const { searchGame, searchLoadingState } = useData();
   const [data, setData] = useState([]);
   const handleSearch = async(text:string)=>{
@@ -19,8 +27,7 @@ export default function SearchScreen() {
     setData(games);
   }
   return (
-    <CustomContainer style={styles.container}>       
-      <Title>Search</Title>
+    <CustomContainer style={styles.container}>
       <Search handleSearch={handleSearch}/>
       <View style={{margin:8}}/>
       {
@@ -37,7 +44,7 @@ export default function SearchScreen() {
         searchLoadingState === 'loaded' ?
         data.map((item: any, index: number) => {
           return (
-            <GameCard key={index} item={item} onPress={()=>console.log("Hii")}/>
+            <GameCard key={index} item={item} onPress={()=>handlePress(item.gameID)}/>
                 );
           })
         :
