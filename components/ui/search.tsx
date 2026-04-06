@@ -20,6 +20,7 @@ export default function Search({handleSearch}:SearchProps){
              clearButtonMode="while-editing" 
              onSubmitEditing={()=>handleSearch(searchText)}
              selectTextOnFocus
+             placeholder="Enter your game"
              />
         </View>
     )
@@ -29,7 +30,8 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         padding:5,
-        borderRadius:10
+        borderRadius:10,
+        paddingLeft:10,
     },
     input:{
         width:'100%',

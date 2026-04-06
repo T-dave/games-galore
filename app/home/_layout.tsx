@@ -3,7 +3,7 @@ import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/FontAwesome";
-import FavoriteScreen from "./favorites";
+import StoresScreen from "./stores";
 import HomeScreen from "./home";
 import SearchScreen from "./search";
 
@@ -45,12 +45,12 @@ export default function TabLayout() {
         }}
       />
       <Tab.Screen
-        name="Favorites"
-        component={FavoriteScreen}
+        name="Stores"
+        component={StoresScreen}
         options={{
-          tabBarLabel: "Favorites",
+          tabBarLabel: "Stores",
           tabBarIcon: ({ color }) => (
-            <Icon name="heart" size={30} color={color} />
+            <Icon name="gamepad" size={30} color={color} />
           ),
         }}
       />

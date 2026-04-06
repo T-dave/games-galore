@@ -3,9 +3,7 @@ import { ActivityIndicator, Dimensions, StyleSheet, TouchableOpacity, View } fro
 import { DealCard } from "./gameCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import Loader from "./ui/loader";
 
-const { height, width } = Dimensions.get("window");
 export default function TopDeals() {
     const topDealsData = useSelector((state: RootState) => state.store.topDealsData)
   return (
@@ -28,7 +26,7 @@ export default function TopDeals() {
         );
         })
         :
-        <Loader/>
+         <ActivityIndicator size={60}/>
       }
     </View>
   );
@@ -42,12 +40,4 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  loaderView:{
-    position:'absolute',
-    flex:1,
-    height:height,
-    width:width,
-    alignItems:'center',
-    justifyContent:'center',
-  }
 });

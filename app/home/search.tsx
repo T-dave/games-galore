@@ -5,9 +5,13 @@ import Search from "@/components/ui/search";
 import { useState } from "react";
 import useData from "@/hooks/dataHook";
 import { GameCard } from "@/components/gameCard";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import StoreCards from "@/components/storeCard";
 
 const { height, width } = Dimensions.get("window");
 export default function SearchScreen() {
+  const storeData = useSelector((state: RootState) => state.store.storeData);
   const { searchGame, searchLoadingState } = useData();
   const [data, setData] = useState([]);
   const handleSearch = async(text:string)=>{
@@ -42,7 +46,14 @@ export default function SearchScreen() {
           <Body>An Error occured</Body>
         </View>
         :
-        <></>
+        <View>
+          <Title style={{fontSize:25, marginBottom:5}}>Sores</Title>
+          <View style={styles.stores}>
+            {
+              storeData.map((obj:any, index:number)=><StoreCards key={index} item={obj}/>)
+            }
+          </View>
+        </View>
       }
     </CustomContainer>
   );
@@ -58,5 +69,9 @@ const styles = StyleSheet.create({
     width:width,
     alignItems:'center',
     justifyContent:'center',
+  },
+  stores:{
+    flexDirection:'row',
+    flexWrap:'wrap'
   }
 });
