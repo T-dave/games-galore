@@ -5,7 +5,7 @@ export default function StoreCards({item}:any){
     return (
         <TouchableOpacity style={styles.container}>
             <Image source={{ uri: `https://www.cheapshark.com${item.images.logo}`}} style={styles.image}/>
-            <Title style={{fontSize:20, textDecorationLine:item.isActive === 0 ? "line-through" : 'none'}}>{item.storeName}</Title>
+            <Title style={{fontSize:18, textDecorationLine:item.isActive === 0 ? "line-through" : 'none'}}>{item.storeName}</Title>
         </TouchableOpacity>
     )
 }
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
         marginVertical:10
     },
     image:{
-        width:30,
-        height:30,
+        width:26,
+        height:26,
         marginRight:3
     },
     inner:{

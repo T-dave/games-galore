@@ -7,6 +7,10 @@ import { useDispatch } from "react-redux";
 const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
 
 export default function useData() {
+  const random =(id:number)=>{
+    return Math.round(Math.random()*id).toString();
+  }
+  
   const dispatch = useDispatch();
   const [searchLoadingState, setSearchLoadingState] = useState("none");
   const [gameLoadingState, setGameLoadingState] = useState("none");
@@ -80,6 +84,7 @@ export default function useData() {
     searchGame,
     getGame,
     searchLoadingState,
+    setSearchLoadingState,
     gameLoadingState,
   };
 }

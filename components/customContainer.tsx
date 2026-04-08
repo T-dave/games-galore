@@ -12,7 +12,7 @@ export default function CustomContainer({
   type,
   style,
   children,
-  edges=["top", "bottom"]
+  edges=["top"]
 }: ContainerProps) {
   const { colour } = useAppTheme();
   return (

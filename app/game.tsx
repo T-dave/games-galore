@@ -38,7 +38,7 @@ export default function GameScreen() {
     }
     
   return (
-    <CustomContainer style={styles.container}>
+    <CustomContainer style={styles.container} edges={["top", "bottom"]}>
         <Top text="Game"/> 
         {
             gameLoadingState === 'loading'  || !gameData ?

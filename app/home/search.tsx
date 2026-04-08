@@ -7,7 +7,7 @@ import useData from "@/hooks/dataHook";
 import { GameCard } from "@/components/gameCard";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import StoreCards from "@/components/storeCard";
+import StoreCard from "@/components/storeCard";
 import { router } from "expo-router";
 
 const { height, width } = Dimensions.get("window");
@@ -20,15 +20,19 @@ export default function SearchScreen() {
       params: { id:id }
     });
   };
-  const { searchGame, searchLoadingState } = useData();
+  const { searchGame, searchLoadingState, setSearchLoadingState } = useData();
   const [data, setData] = useState([]);
   const handleSearch = async(text:string)=>{
     const games = await searchGame(text);
     setData(games);
   }
+  const handleClear= ()=>{
+    setData([]);
+    setSearchLoadingState('none');
+  }
   return (
     <CustomContainer style={styles.container}>
-      <Search handleSearch={handleSearch}/>
+      <Search handleSearch={handleSearch} clear={handleClear}/>
       <View style={{margin:8}}/>
       {
         searchLoadingState === 'loading' ?
@@ -41,7 +45,7 @@ export default function SearchScreen() {
           <Body>No results found</Body>
         </View>
         :
-        searchLoadingState === 'loaded' ?
+        searchLoadingState === 'loaded' && data.length > 0 ?
         data.map((item: any, index: number) => {
           return (
             <GameCard key={index} item={item} onPress={()=>handlePress(item.gameID)}/>
@@ -57,7 +61,7 @@ export default function SearchScreen() {
           <Title style={{fontSize:25, marginBottom:5}}>Sores</Title>
           <View style={styles.stores}>
             {
-              storeData.map((obj:any, index:number)=><StoreCards key={index} item={obj}/>)
+              storeData.map((obj:any, index:number)=><StoreCard key={index} item={obj}/>)
             }
           </View>
         </View>
