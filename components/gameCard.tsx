@@ -2,9 +2,10 @@ import { Body, Caption, Subtitle, Title } from "@/constants/text";
 import useHook from "@/hooks/generalHook";
 import useAppTheme from "@/hooks/use-Theme";
 import { RootState } from "@/store/store";
-import { Image, ImageBackground, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { useSelector } from "react-redux";
 import Price from "./ui/price";
+import { useEffect } from "react";
 
 interface GameProp {
   item: any;
@@ -32,7 +33,7 @@ export function DealCard({ item, onPress }: GameProp) {
         resizeMode="cover"
       />
       <View style={styles.texts}>
-        <Subtitle style={{ fontSize: 20 }}>{showTitle(item.title, 22)}</Subtitle>
+        <Text style={{ fontSize: 18, fontWeight:600 }}>{showTitle(item.title, 18)}</Text>
         <View style={styles.price}>
           <Body style={styles.oldPrice}>${item.normalPrice}</Body>
           <Body>${item.salePrice}</Body>
@@ -64,7 +65,7 @@ export function GameCard({ item, onPress }: GameProp){
     >
      <Title color="#FFF">{showTitle(item.external, 18)}</Title>
      <View style={styles.gamePrice}>
-      <Body color="#FFF">${item.cheapest}</Body>
+      <Body color="#FFF">Cheapest deal: ${item.cheapest}</Body>
     </View>
     </TouchableOpacity>
     </ImageBackground>
@@ -83,8 +84,8 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   image: {
-    width: 90,
-    height: 95,
+    width: '35%',
+    height: 90,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
   },
@@ -103,8 +104,8 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   storeLogo:{
-    width:20,
-    height:20,
+    width:15,
+    height:15,
     marginRight:5
   },
   store:{

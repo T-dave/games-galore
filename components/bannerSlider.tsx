@@ -13,7 +13,7 @@ interface Props extends ImageBackgroundProps{
 export default function BannerSlider({ item, style, onPress }:Props){
     const { showTitle } = useHook();
     return(
-        <TouchableOpacity style={{width:width, paddingHorizontal:5}} onPress={onPress}>
+        <TouchableOpacity style={{width:width, paddingHorizontal:10}} onPress={onPress}>
             <ImageBackground source={{uri: item.thumb}} style={[styles.banner, style]} imageStyle={{borderRadius:10}} >
                 <LinearGradient 
                 colors={['rgba(0,0,0,0.7)', 'transparent']}
@@ -22,10 +22,12 @@ export default function BannerSlider({ item, style, onPress }:Props){
                 style={styles.innerView}
                 >
                     <Price oldPrice={item.normalPrice} newPrice={item.salePrice}/>
-                    <Title color="white" style={styles.title}>{showTitle(item.title)}</Title>
-                    <View style={styles.bottom}>
-                        <Body color="white" style={styles.oldPrice}>${item.normalPrice}</Body>
-                        <Body color="white">${item.salePrice}</Body>
+                    <View>
+                        <Title color="white" style={styles.title}>{showTitle(item.title)}</Title>
+                        <View style={styles.bottom}>
+                            <Body color="white" style={styles.oldPrice}>${item.normalPrice}</Body>
+                            <Body color="white">${item.salePrice}</Body>
+                        </View>
                     </View>
                 </LinearGradient>
             </ImageBackground>
@@ -38,20 +40,18 @@ const styles = StyleSheet.create({
         
     },
     innerView:{
-        height:140,
+        height:160,
         borderRadius:10,
         justifyContent:'space-between',
         padding:8
         },
     title:{
-        alignSelf:'center',
         fontSize:25
     },
     bottom:{
         flexDirection:'row',
+        alignItems:'center',
         width:'100%',
-        justifyContent:'center',
-        alignItems:'center'
     },
     oldPrice:{
         color:"#DDDDDD",

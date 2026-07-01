@@ -1,9 +1,9 @@
 import { Body, Title } from "@/constants/text";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-export default function StoreCards({item}:any){
+export default function StoreCards({item, onPress}:any){
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <Image source={{ uri: `https://www.cheapshark.com${item.images.logo}`}} style={styles.image}/>
             <Title style={{fontSize:18, textDecorationLine:item.isActive === 0 ? "line-through" : 'none'}}>{item.storeName}</Title>
         </TouchableOpacity>

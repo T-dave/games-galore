@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 20,
     justifyContent: "center",
+    alignItems:'center',
+    marginTop:3
   },
   dot: {
     height: 4,
@@ -34,5 +36,7 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: Colors.primary,
+    height:6,
+    width:6
   },
 });

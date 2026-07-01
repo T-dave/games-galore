@@ -1,23 +1,29 @@
-import Button from "@/components/button";
 import CustomContainer from "@/components/customContainer";
 import StoreCards from "@/components/storeCard";
-import { Title } from "@/constants/text";
-import useData from "@/hooks/dataHook";
-import useAppTheme from "@/hooks/use-Theme";
 import { RootState } from "@/store/store";
+import { router } from "expo-router";
 import { StyleSheet, FlatList, View } from "react-native";
 import { useSelector } from "react-redux";
 
 export default function StoresScreen() {
-  const { deleteItem } = useData();
-  const { toggleTheme } = useAppTheme();
   const storeData = useSelector((state: RootState) => state.store.storeData);
-  
+  const handlePress = (storeID:string, storeName:string, images:any)=>{
+    console.log(images)
+    router.navigate({
+      pathname: '/store',
+      params: { 
+        id:storeID,
+        name:storeName,
+        images:images.banner
+       }
+    });
+  }
   return (
     <CustomContainer style={styles.container}>
       <View style={styles.stores}>
         {
-          storeData.map((obj:any, index:number)=><StoreCards key={index} item={obj}/>)
+          storeData.map((obj:any, index:number)=>
+          <StoreCards key={index} item={obj} onPress={()=>handlePress(obj.storeID, obj.storeName, obj.images)}/>)
         }
       </View>
     </CustomContainer>

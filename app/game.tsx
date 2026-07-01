@@ -39,7 +39,7 @@ export default function GameScreen() {
     
   return (
     <CustomContainer style={styles.container} edges={["top", "bottom"]}>
-        <Top text="Game"/> 
+        <Top text=""/> 
         {
             gameLoadingState === 'loading'  || !gameData ?
             <Loader/>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         
     },
     image:{
-        height:150,
+        height:160,
         borderRadius:10
     },
     inner:{

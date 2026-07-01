@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function useHook() {
   const [isLoading, setIsLoading] = useState(false);
-  const showTitle = (title:string, length=25)=>{
+  const showTitle = (title:string, length=15)=>{
     if(title.length < length) return title
     else return title.slice(0,length) + "..."
   }

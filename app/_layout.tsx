@@ -24,6 +24,9 @@ export default function RootLayout() {
           <Stack.Screen name="home" options={{ headerShown: false }} />
           <Stack.Screen name="onboard" options={{ headerShown: false }} />
           <Stack.Screen name="game" options={{ headerShown: false }} />
+          <Stack.Screen name="gameStore" options={{ headerShown: false }} />
+          <Stack.Screen name="store" options={{ headerShown: false }} />
+          <Stack.Screen name="allGames" options={{ headerShown: false }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

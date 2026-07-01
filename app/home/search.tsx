@@ -1,23 +1,20 @@
 import CustomContainer from "@/components/customContainer";
-import { StyleSheet, View, Text, ActivityIndicator, Dimensions } from "react-native";
-import { Body, Title } from '@/constants/text';
+import { StyleSheet, View, ActivityIndicator, Dimensions } from "react-native";
+import { Body } from '@/constants/text';
 import Search from "@/components/ui/search";
 import { useState } from "react";
 import useData from "@/hooks/dataHook";
 import { GameCard } from "@/components/gameCard";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import StoreCard from "@/components/storeCard";
 import { router } from "expo-router";
 
 const { height, width } = Dimensions.get("window");
 
 export default function SearchScreen() {
-  const storeData = useSelector((state: RootState) => state.store.storeData);
-  const handlePress = async (id:string) => {
+  const handlePress = async (dealID:string) => {
+    console.log(dealID)
     router.navigate({
-      pathname: '/game',
-      params: { id:id }
+      pathname: '/gameStore',
+      params: { id:dealID }
     });
   };
   const { searchGame, searchLoadingState, setSearchLoadingState } = useData();
@@ -48,7 +45,7 @@ export default function SearchScreen() {
         searchLoadingState === 'loaded' && data.length > 0 ?
         data.map((item: any, index: number) => {
           return (
-            <GameCard key={index} item={item} onPress={()=>handlePress(item.gameID)}/>
+            <GameCard key={index} item={item} onPress={()=>handlePress(item.cheapestDealID)}/>
                 );
           })
         :
@@ -58,12 +55,7 @@ export default function SearchScreen() {
         </View>
         :
         <View>
-          <Title style={{fontSize:25, marginBottom:5}}>Sores</Title>
-          <View style={styles.stores}>
-            {
-              storeData.map((obj:any, index:number)=><StoreCard key={index} item={obj}/>)
-            }
-          </View>
+         
         </View>
       }
     </CustomContainer>
